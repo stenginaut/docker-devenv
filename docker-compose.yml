@@ -1,0 +1,24 @@
+version: '3.4'
+services:
+    mariadb:
+        image: mariadb:10.6.1
+        restart: always
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: foobar
+        volumes:
+            - ./mysql:/var/lib/mysql
+    phpmyadmin:
+        image: phpmyadmin
+        restart: always
+        ports:
+            - 1337:80
+        environment:
+            - PMA_HOST=mariadb
+            - PMA_USER=root
+            - PMA_PASSWORD=foobar
+        depends_on:
+            - mariadb
+        links:
+            - mariadb
