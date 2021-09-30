@@ -20,5 +20,3 @@ services:
             - PMA_PASSWORD=foobar
         depends_on:
             - mariadb
-        links:
-            - mariadb
